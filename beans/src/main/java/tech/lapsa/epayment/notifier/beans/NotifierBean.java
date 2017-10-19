@@ -2,8 +2,6 @@ package tech.lapsa.epayment.notifier.beans;
 
 import static tech.lapsa.epayment.notifier.beans.Constants.*;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.Connection;
@@ -25,8 +23,6 @@ import tech.lapsa.java.commons.function.MyObjects;
 @Stateless
 public class NotifierBean implements Notifier {
 
-    private final Logger logger = Logger.getLogger(Notifier.class.getPackage().getName());
-
     @Resource(name = JNDI_JMS_CONNECTION_FACTORY)
     private ConnectionFactory connectionFactory;
 
@@ -35,27 +31,6 @@ public class NotifierBean implements Notifier {
 
     @Resource(name = JNDI_JMS_DEST_PAYMENTSUCCESS_REQUESTER_EMAIL)
     private Destination paymentSucessUserEmail;
-
-    @Override
-    public void assignOrderNotification(NotificationChannel channel, NotificationRecipientType recipientType,
-	    NotificationRequestStage stage, KKBOrder order) {
-
-	logger.info(String.format(
-		"KKBOrder %1$s notification received on channel : %2$s, recipientType : %3$s requestStage : %4$s", //
-		order, // 1
-		channel, // 2
-		recipientType, // 3
-		stage // 4
-	));
-
-	newNotificationBuilder() //
-		.withChannel(channel) //
-		.withEvent(stage) //
-		.withRecipient(recipientType) //
-		.forEpayment(order) //
-		.build() //
-		.send();
-    }
 
     @Override
     public NotificationBuilder newNotificationBuilder() {
