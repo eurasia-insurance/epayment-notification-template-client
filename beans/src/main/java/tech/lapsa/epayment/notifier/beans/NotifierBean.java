@@ -66,7 +66,7 @@ public class NotifierBean implements Notifier {
 	}
 
 	@Override
-	public NotificationBuilder forEpayment(KKBOrder epayment) {
+	public NotificationBuilder forEntity(KKBOrder epayment) {
 	    this.epayment = MyObjects.requireNonNull(epayment, "epayment");
 	    return this;
 	}

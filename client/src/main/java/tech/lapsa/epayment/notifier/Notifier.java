@@ -12,7 +12,7 @@ public interface Notifier {
 		.withChannel(channel) //
 		.withEvent(stage) //
 		.withRecipient(recipientType) //
-		.forEpayment(order) //
+		.forEntity(order) //
 		.build() //
 		.send();
     }
@@ -27,7 +27,7 @@ public interface Notifier {
 
 	NotificationBuilder withEvent(NotificationRequestStage stage);
 
-	NotificationBuilder forEpayment(KKBOrder request);
+	NotificationBuilder forEntity(KKBOrder request);
 
 	Notification build();
 
