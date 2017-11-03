@@ -27,8 +27,8 @@
 		<javax-jms-commons.version>1.0</javax-jms-commons.version>
 		<lapsa-text.version>1.0</lapsa-text.version>
 		<!-- oldies -->
-		<kkb-lib.version>3.2</kkb-lib.version>
-		<kkb-services-impl-default.version>3.1</kkb-services-impl-default.version>
+		<kkb-lib.version>3.3-SNAPSHOT</kkb-lib.version>
+		<kkb-services-impl-default.version>3.2-SNAPSHOT</kkb-services-impl-default.version>
 	</properties>
 
 	<dependencyManagement>
