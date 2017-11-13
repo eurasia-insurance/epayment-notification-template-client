@@ -1,18 +1,18 @@
 package tech.lapsa.epayment.notifier;
 
-import com.lapsa.kkb.core.KKBOrder;
+import tech.lapsa.epayment.domain.Invoice;
 
 public interface Notifier {
 
     @Deprecated
     default void assignOrderNotification(NotificationChannel channel, NotificationRecipientType recipientType,
 	    NotificationRequestStage stage,
-	    KKBOrder order) {
+	    Invoice invoice) {
 	newNotificationBuilder() //
 		.withChannel(channel) //
 		.withEvent(stage) //
 		.withRecipient(recipientType) //
-		.forEntity(order) //
+		.forEntity(invoice) //
 		.build() //
 		.send();
     }
@@ -27,7 +27,9 @@ public interface Notifier {
 
 	NotificationBuilder withEvent(NotificationRequestStage stage);
 
-	NotificationBuilder forEntity(KKBOrder request);
+	NotificationBuilder forEntity(Invoice invoice);
+
+	NotificationBuilder withProperty(String name, String value);
 
 	Notification build();
 
@@ -36,6 +38,5 @@ public interface Notifier {
 	    void send();
 
 	}
-
     }
 }

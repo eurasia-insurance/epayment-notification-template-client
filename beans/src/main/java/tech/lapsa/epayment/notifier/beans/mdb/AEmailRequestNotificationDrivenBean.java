@@ -2,8 +2,7 @@ package tech.lapsa.epayment.notifier.beans.mdb;
 
 import java.util.Locale;
 
-import com.lapsa.kkb.core.KKBOrder;
-
+import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notifier.beans.NotificationMessages;
 import tech.lapsa.epayment.notifier.beans.NotificationTemplates;
 import tech.lapsa.javax.mail.MailBuilderException;
@@ -13,7 +12,7 @@ import tech.lapsa.javax.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder.TextModel;
 
-public abstract class AEmailRequestNotificationDrivenBean<T extends KKBOrder> extends AOrderNotificationDrivenBean<T> {
+public abstract class AEmailRequestNotificationDrivenBean<T extends Invoice> extends AOrderNotificationDrivenBean<T> {
 
     AEmailRequestNotificationDrivenBean(final Class<T> objectClazz) {
 	super(objectClazz);
@@ -21,7 +20,7 @@ public abstract class AEmailRequestNotificationDrivenBean<T extends KKBOrder> ex
 
     protected abstract MailFactory mailFactory();
 
-    protected abstract MailMessageBuilder recipients(MailMessageBuilder builder, KKBOrder request)
+    protected abstract MailMessageBuilder recipients(MailMessageBuilder builder, Invoice request)
 	    throws MailBuilderException;
 
     protected abstract NotificationMessages getSubjectTemplate();
