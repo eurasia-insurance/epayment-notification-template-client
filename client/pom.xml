@@ -13,10 +13,10 @@
 	<name>Epayment Lib : Notifier : EJB-client</name>
 
 	<dependencies>
-		<!-- oldies -->
+		<!-- tech -->
 		<dependency>
-			<groupId>com.lapsa.kkb-lib</groupId>
-			<artifactId>kkb-core</artifactId>
+			<groupId>tech.lapsa.epayment</groupId>
+			<artifactId>epayment-domain</artifactId>
 			<scope>compile</scope>
 			<optional>false</optional>
 		</dependency>

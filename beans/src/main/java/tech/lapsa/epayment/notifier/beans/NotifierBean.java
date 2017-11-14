@@ -2,6 +2,9 @@ package tech.lapsa.epayment.notifier.beans;
 
 import static tech.lapsa.epayment.notifier.beans.Constants.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.Connection;
@@ -12,13 +15,14 @@ import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
-import com.lapsa.kkb.core.KKBOrder;
-
+import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notifier.NotificationChannel;
 import tech.lapsa.epayment.notifier.NotificationRecipientType;
 import tech.lapsa.epayment.notifier.NotificationRequestStage;
 import tech.lapsa.epayment.notifier.Notifier;
+import tech.lapsa.java.commons.function.MyExceptions;
 import tech.lapsa.java.commons.function.MyObjects;
+import tech.lapsa.java.commons.function.MyStrings;
 
 @Stateless
 public class NotifierBean implements Notifier {
@@ -42,45 +46,56 @@ public class NotifierBean implements Notifier {
 	private NotificationChannel channel;
 	private NotificationRecipientType recipientType;
 	private NotificationRequestStage event;
-	private KKBOrder epayment;
+	private Invoice invoice;
+	private final Map<String, String> properties = new HashMap<>();
 
 	private NotificationBuilderImpl() {
 	}
 
 	@Override
-	public NotificationBuilder withChannel(NotificationChannel channel) {
+	public NotificationBuilder withChannel(final NotificationChannel channel) {
 	    this.channel = MyObjects.requireNonNull(channel, "channel");
 	    return this;
 	}
 
 	@Override
-	public NotificationBuilder withRecipient(NotificationRecipientType recipientType) {
+	public NotificationBuilder withRecipient(final NotificationRecipientType recipientType) {
 	    this.recipientType = MyObjects.requireNonNull(recipientType, "recipientType");
 	    return this;
 	}
 
 	@Override
-	public NotificationBuilder withEvent(NotificationRequestStage event) {
+	public NotificationBuilder withEvent(final NotificationRequestStage event) {
 	    this.event = MyObjects.requireNonNull(event, "event");
 	    return this;
 	}
 
 	@Override
-	public NotificationBuilder forEntity(KKBOrder epayment) {
-	    this.epayment = MyObjects.requireNonNull(epayment, "epayment");
+	public NotificationBuilder forEntity(final Invoice invoice) {
+	    this.invoice = MyObjects.requireNonNull(invoice, "invoice");
+	    return this;
+	}
+
+	@Override
+	public NotificationBuilder withProperty(final String name, final String value) {
+	    MyStrings.requireNonEmpty(name, "name");
+	    MyStrings.requireNonEmpty(value, "value");
+	    if (properties.containsKey(name))
+		throw MyExceptions.illegalArgumentFormat("Already has property '%1$s'", name);
+	    properties.put(name, value);
 	    return this;
 	}
 
 	@Override
 	public Notification build() {
-	    MyObjects.requireNonNull(epayment, "request");
-	    Destination destination = resolveDestination();
+	    MyObjects.requireNonNull(invoice, "request");
+	    final Destination destination = resolveDestination();
 
 	    return new NotificationImpl(destination);
 	}
 
 	private Destination resolveDestination() {
-	    MyObjects.requireNonNull(epayment, "epayment");
+	    MyObjects.requireNonNull(invoice, "invoice");
 	    MyObjects.requireNonNull(event, "event");
 	    MyObjects.requireNonNull(recipientType, "recipientType");
 	    MyObjects.requireNonNull(channel, "channel");
@@ -119,12 +134,12 @@ public class NotifierBean implements Notifier {
 	private final class NotificationImpl implements Notification {
 
 	    private final Destination destination;
-	    private final KKBOrder request;
+	    private final Invoice invoice;
 	    private boolean sent = false;
 
-	    private NotificationImpl(Destination destination) {
+	    private NotificationImpl(final Destination destination) {
 		this.destination = MyObjects.requireNonNull(destination, "destination");
-		this.request = MyObjects.requireNonNull(NotificationBuilderImpl.this.epayment, "request");
+		invoice = MyObjects.requireNonNull(NotificationBuilderImpl.this.invoice, "invoice");
 	    }
 
 	    @Override
@@ -132,12 +147,22 @@ public class NotifierBean implements Notifier {
 		if (sent)
 		    throw new IllegalStateException("Already sent");
 		try (Connection connection = connectionFactory.createConnection()) {
-		    Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		    MessageProducer producer = session.createProducer(destination);
-		    Message msg = session.createObjectMessage(request);
+		    final Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+		    final MessageProducer producer = session.createProducer(destination);
+		    final Message msg = session.createObjectMessage(invoice);
+		    properties.entrySet() //
+			    .stream() //
+			    .forEach(x -> {
+				try {
+				    msg.setStringProperty(x.getKey(), x.getValue());
+				} catch (final JMSException e) {
+				    throw new RuntimeException("Failed to assign a property", e);
+				}
+			    });
+
 		    producer.send(msg);
 		    sent = true;
-		} catch (JMSException e) {
+		} catch (final JMSException e) {
 		    throw new RuntimeException("Failed to assign a notification task", e);
 		}
 	    }

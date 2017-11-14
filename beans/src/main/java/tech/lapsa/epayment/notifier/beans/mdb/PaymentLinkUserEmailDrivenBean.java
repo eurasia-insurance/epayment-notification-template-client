@@ -7,8 +7,7 @@ import java.util.Locale;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
 
-import com.lapsa.kkb.core.KKBOrder;
-
+import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notifier.beans.NotificationMessages;
 import tech.lapsa.epayment.notifier.beans.NotificationTemplates;
 import tech.lapsa.epayment.notifier.beans.qualifiers.QRecipientUser;
@@ -17,14 +16,14 @@ import tech.lapsa.javax.mail.MailFactory;
 import tech.lapsa.javax.mail.MailMessageBuilder;
 
 @MessageDriven(mappedName = JNDI_JMS_DEST_PAYMENTLINK_REQUESTER_EMAIL)
-public class PaymentLinkUserEmailDrivenBean extends AEmailRequestNotificationDrivenBean<KKBOrder> {
+public class PaymentLinkUserEmailDrivenBean extends AEmailRequestNotificationDrivenBean<Invoice> {
 
     @Inject
     @QRecipientUser
     protected MailFactory mailFactory;
 
     public PaymentLinkUserEmailDrivenBean() {
-	super(KKBOrder.class);
+	super(Invoice.class);
     }
 
     @Override
@@ -33,13 +32,14 @@ public class PaymentLinkUserEmailDrivenBean extends AEmailRequestNotificationDri
     }
 
     @Override
-    protected MailMessageBuilder recipients(MailMessageBuilder builder, KKBOrder request) throws MailBuilderException {
-	return builder.withTORecipient(request.getConsumerEmail(), request.getConsumerName());
+    protected MailMessageBuilder recipients(final MailMessageBuilder builder, final Invoice invoice)
+	    throws MailBuilderException {
+	return builder.withTORecipient(invoice.getConsumerEmail(), invoice.getConsumerName());
     }
 
     @Override
-    protected Locale locale(KKBOrder request) {
-	return request.getConsumerLanguage().getLocale();
+    protected Locale locale(final Invoice invoice) {
+	return invoice.getConsumerPreferLanguage().getLocale();
     }
 
     @Override
