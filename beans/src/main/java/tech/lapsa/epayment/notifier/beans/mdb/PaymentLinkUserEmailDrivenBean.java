@@ -32,12 +32,13 @@ public class PaymentLinkUserEmailDrivenBean extends AEmailRequestNotificationDri
     }
 
     @Override
-    protected MailMessageBuilder recipients(MailMessageBuilder builder, Invoice invoice) throws MailBuilderException {
+    protected MailMessageBuilder recipients(final MailMessageBuilder builder, final Invoice invoice)
+	    throws MailBuilderException {
 	return builder.withTORecipient(invoice.getConsumerEmail(), invoice.getConsumerName());
     }
 
     @Override
-    protected Locale locale(Invoice invoice) {
+    protected Locale locale(final Invoice invoice) {
 	return invoice.getConsumerPreferLanguage().getLocale();
     }
 

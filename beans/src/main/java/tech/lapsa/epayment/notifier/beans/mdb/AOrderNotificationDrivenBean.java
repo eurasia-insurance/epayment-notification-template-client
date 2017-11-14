@@ -25,11 +25,11 @@ public abstract class AOrderNotificationDrivenBean<T extends Invoice> extends Ob
     private Properties configurationProperties;
 
     @Override
-    protected void accept(T invoice, Properties properties) {
+    protected void accept(final T invoice, final Properties properties) {
 	MyObjects.requireNonNull(invoice, "invoice");
 
 	invoice.unlazy();
-	TextModel textModel = TextFactory.newModelBuilder() //
+	final TextModel textModel = TextFactory.newModelBuilder() //
 		.withLocale(locale(invoice)) //
 		.bind("instanceVerb", configurationProperties.getProperty(PROPERTY_INSTANCE_VERB, "")) //
 		.bind("invoice", invoice) //

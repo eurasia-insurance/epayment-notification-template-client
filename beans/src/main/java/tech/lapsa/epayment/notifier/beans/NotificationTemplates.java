@@ -12,7 +12,7 @@ public enum NotificationTemplates implements LocalizedElement {
     //
     ;
 
-    public InputStream getResourceAsStream(Locale locale) {
+    public InputStream getResourceAsStream(final Locale locale) {
 	return MyResources.getAsStream(this.getClass(), regular(locale));
     }
 }
