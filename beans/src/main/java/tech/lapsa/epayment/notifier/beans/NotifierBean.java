@@ -4,6 +4,7 @@ import static tech.lapsa.epayment.notifier.beans.Constants.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -136,10 +137,17 @@ public class NotifierBean implements Notifier {
 	    private final Destination destination;
 	    private final Invoice invoice;
 	    private boolean sent = false;
+	    private Consumer<Notification> onSuccess;
 
 	    private NotificationImpl(final Destination destination) {
 		this.destination = MyObjects.requireNonNull(destination, "destination");
 		invoice = MyObjects.requireNonNull(NotificationBuilderImpl.this.invoice, "invoice");
+	    }
+
+	    @Override
+	    public Notification onSuccess(Consumer<Notification> onSuccess) {
+		this.onSuccess = MyObjects.requireNonNull(onSuccess, "onSuccess");
+		return this;
 	    }
 
 	    @Override
@@ -162,6 +170,8 @@ public class NotifierBean implements Notifier {
 
 		    producer.send(msg);
 		    sent = true;
+		    if (MyObjects.nonNull(onSuccess))
+			onSuccess.accept(this);
 		} catch (final JMSException e) {
 		    throw new RuntimeException("Failed to assign a notification task", e);
 		}

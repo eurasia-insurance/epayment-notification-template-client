@@ -1,5 +1,7 @@
 package tech.lapsa.epayment.notifier;
 
+import java.util.function.Consumer;
+
 import tech.lapsa.epayment.domain.Invoice;
 
 public interface Notifier {
@@ -35,8 +37,9 @@ public interface Notifier {
 
 	interface Notification {
 
-	    void send();
+	    Notification onSuccess(Consumer<Notification> cons);
 
+	    void send();
 	}
     }
 }
