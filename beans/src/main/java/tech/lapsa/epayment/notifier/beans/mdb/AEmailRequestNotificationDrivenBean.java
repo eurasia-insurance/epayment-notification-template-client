@@ -28,9 +28,9 @@ public abstract class AEmailRequestNotificationDrivenBean<T extends Invoice> ext
     protected abstract NotificationTemplates getBodyTemplate();
 
     @Override
-    protected void sendWithModel(final TextModel textModel, final T order) {
+    protected void sendWithModel(final TextModel textModel, final T invoice) {
 	try {
-	    final Locale locale = locale(order);
+	    final Locale locale = locale(invoice);
 
 	    final MailMessageBuilder template = mailFactory()
 		    .newMailBuilder();
@@ -47,7 +47,7 @@ public abstract class AEmailRequestNotificationDrivenBean<T extends Invoice> ext
 		    .asString();
 	    template.withHtmlPart(body);
 
-	    recipients(template, order)
+	    recipients(template, invoice)
 		    .build()
 		    .send();
 
