@@ -20,8 +20,8 @@ import tech.lapsa.epayment.notifier.Notifier;
 import tech.lapsa.java.commons.function.MyExceptions;
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyStrings;
-import tech.lapsa.javax.jms.MyJMSClient;
-import tech.lapsa.javax.jms.MyJMSClient.MyJMSConsumer;
+import tech.lapsa.javax.jms.JmsClient;
+import tech.lapsa.javax.jms.JmsClient.JmsSender;
 
 @Stateless
 public class NotifierBean implements Notifier {
@@ -38,7 +38,7 @@ public class NotifierBean implements Notifier {
     }
 
     @Inject
-    private MyJMSClient jmsClient;
+    private JmsClient jmsClient;
 
     private final class NotificationBuilderImpl implements NotificationBuilder {
 
@@ -153,8 +153,8 @@ public class NotifierBean implements Notifier {
 		if (sent)
 		    throw new IllegalStateException("Already sent");
 		try {
-		    MyJMSConsumer<Invoice> consumer = jmsClient.createConsumer(destination);
-		    consumer.accept(invoice);
+		    final JmsSender<Invoice> sender = jmsClient.createSender(destination);
+		    sender.send(invoice);
 		    sent = true;
 		    if (MyObjects.nonNull(onSuccess))
 			onSuccess.accept(this);
