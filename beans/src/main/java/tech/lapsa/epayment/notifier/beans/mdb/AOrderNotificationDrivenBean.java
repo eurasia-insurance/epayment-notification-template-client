@@ -9,12 +9,12 @@ import javax.annotation.Resource;
 
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.java.commons.function.MyObjects;
-import tech.lapsa.javax.jms.ObjectConsumerListener;
+import tech.lapsa.javax.jms.ConsumerServiceDrivenBean;
 import tech.lapsa.lapsa.text.TextFactory;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder.TextModel;
 
-public abstract class AOrderNotificationDrivenBean<T extends Invoice> extends ObjectConsumerListener<T> {
+public abstract class AOrderNotificationDrivenBean<T extends Invoice> extends ConsumerServiceDrivenBean<T> {
 
     AOrderNotificationDrivenBean(final Class<T> objectClazz) {
 	super(objectClazz);
