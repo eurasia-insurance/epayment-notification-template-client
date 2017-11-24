@@ -46,7 +46,7 @@ public class PaymentSuccessUserEmailDrivenBean extends AEmailRequestNotification
 
     @Override
     protected NotificationMessages getSubjectTemplate() {
-	return NotificationMessages.KKB_ORDER_PAYMENT_SUCCESS_SUBJECT;
+	return NotificationMessages.PAYMENT_SUCCESS_SUBJECT;
     }
 
     @Override
