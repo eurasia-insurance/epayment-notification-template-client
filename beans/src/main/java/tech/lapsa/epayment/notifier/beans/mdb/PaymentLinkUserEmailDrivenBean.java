@@ -48,7 +48,7 @@ public class PaymentLinkUserEmailDrivenBean extends AEmailRequestNotificationDri
 
     @Override
     protected NotificationMessages getSubjectTemplate() {
-	return NotificationMessages.KKB_ORDER_PAYMENT_LINK_SUBJECT;
+	return NotificationMessages.PAYMENT_LINK_NOTIFICATION_SUBJECT;
     }
 
     @Override
