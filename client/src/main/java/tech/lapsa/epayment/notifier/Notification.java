@@ -1,9 +1,14 @@
 package tech.lapsa.epayment.notifier;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.java.commons.function.MyObjects;
+import tech.lapsa.java.commons.function.MyStrings;
 
 public final class Notification implements Serializable {
 
@@ -19,6 +24,7 @@ public final class Notification implements Serializable {
 	private NotificationRecipientType recipientType;
 	private NotificationRequestStage event;
 	private Invoice entity;
+	private Map<String, String> properties = new HashMap<>();
 
 	private NotificationBuilder() {
 	}
@@ -43,22 +49,30 @@ public final class Notification implements Serializable {
 	    return this;
 	}
 
-	public Notification build() {
-	    return new Notification(channel, recipientType, event, entity);
+	public NotificationBuilder withProperty(final String key, final String value) {
+	    properties.put(MyStrings.requireNonEmpty(key, "key"), MyStrings.requireNonEmpty(value, "value"));
+	    return this;
 	}
+
+	public Notification build() {
+	    return new Notification(channel, recipientType, event, entity, properties);
+	}
+
     }
 
     private final NotificationChannel channel;
     private final NotificationRecipientType recipientType;
     private final NotificationRequestStage event;
     private final Invoice entity;
+    private final Map<String, String> propsMap;
 
     private Notification(NotificationChannel channel, NotificationRecipientType recipientType,
-	    NotificationRequestStage event, Invoice entity) {
+	    NotificationRequestStage event, Invoice entity, Map<String, String> propsMap) {
 	this.channel = MyObjects.requireNonNull(channel, "channel");
 	this.recipientType = MyObjects.requireNonNull(recipientType, "recipientType");
 	this.event = MyObjects.requireNonNull(event, "event");
 	this.entity = MyObjects.requireNonNull(entity, "entity");
+	this.propsMap = Collections.unmodifiableMap(MyObjects.requireNonNull(propsMap, "propsMap"));
     }
 
     public NotificationChannel getChannel() {
@@ -75,5 +89,14 @@ public final class Notification implements Serializable {
 
     public Invoice getEntity() {
 	return entity;
+    }
+
+    public Properties getProperties() {
+	if (propsMap.isEmpty())
+	    return null;
+	final Properties p = new Properties();
+	propsMap.entrySet().stream() //
+		.forEach(x -> p.setProperty(x.getKey(), x.getValue()));
+	return p;
     }
 }
