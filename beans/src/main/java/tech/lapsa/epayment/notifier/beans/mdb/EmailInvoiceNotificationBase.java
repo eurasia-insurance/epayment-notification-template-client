@@ -12,9 +12,9 @@ import tech.lapsa.javax.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder.TextModel;
 
-public abstract class AEmailRequestNotificationDrivenBean<T extends Invoice> extends AOrderNotificationDrivenBean<T> {
+public abstract class EmailInvoiceNotificationBase<T extends Invoice> extends InvoiceNotificationBase<T> {
 
-    AEmailRequestNotificationDrivenBean(final Class<T> objectClazz) {
+    EmailInvoiceNotificationBase(final Class<T> objectClazz) {
 	super(objectClazz);
     }
 
