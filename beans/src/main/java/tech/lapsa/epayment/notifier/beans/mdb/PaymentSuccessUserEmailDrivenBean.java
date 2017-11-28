@@ -12,14 +12,12 @@ import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notifier.beans.NotificationMessages;
 import tech.lapsa.epayment.notifier.beans.NotificationTemplates;
 import tech.lapsa.epayment.notifier.beans.qualifiers.QRecipientUser;
-import tech.lapsa.javax.jms.JmsSkipValidation;
 import tech.lapsa.javax.mail.MailBuilderException;
 import tech.lapsa.javax.mail.MailFactory;
 import tech.lapsa.javax.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 
 @MessageDriven(mappedName = JNDI_JMS_DEST_PAYMENTSUCCESS_REQUESTER_EMAIL)
-@JmsSkipValidation
 public class PaymentSuccessUserEmailDrivenBean extends EmailInvoiceNotificationBase<Invoice> {
 
     @Inject
