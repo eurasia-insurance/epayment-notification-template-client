@@ -10,13 +10,15 @@ import javax.annotation.Resource;
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.javax.jms.ConsumerServiceDrivenBean;
+import tech.lapsa.javax.jms.JmsSkipValidation;
 import tech.lapsa.lapsa.text.TextFactory;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder.TextModel;
 
-public abstract class AOrderNotificationDrivenBean<T extends Invoice> extends ConsumerServiceDrivenBean<T> {
+@JmsSkipValidation
+public abstract class InvoiceNotificationBase<T extends Invoice> extends ConsumerServiceDrivenBean<T> {
 
-    AOrderNotificationDrivenBean(final Class<T> objectClazz) {
+    InvoiceNotificationBase(final Class<T> objectClazz) {
 	super(objectClazz);
     }
 
@@ -26,7 +28,7 @@ public abstract class AOrderNotificationDrivenBean<T extends Invoice> extends Co
     private Properties configurationProperties;
 
     @Override
-    protected void accept(final T invoice, final Properties properties) {
+    public void receiving(final T invoice, final Properties properties) {
 	MyObjects.requireNonNull(invoice, "invoice");
 
 	invoice.unlazy();

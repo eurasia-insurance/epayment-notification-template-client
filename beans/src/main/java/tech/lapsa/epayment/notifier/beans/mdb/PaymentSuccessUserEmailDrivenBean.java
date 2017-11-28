@@ -18,7 +18,7 @@ import tech.lapsa.javax.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 
 @MessageDriven(mappedName = JNDI_JMS_DEST_PAYMENTSUCCESS_REQUESTER_EMAIL)
-public class PaymentSuccessUserEmailDrivenBean extends AEmailRequestNotificationDrivenBean<Invoice> {
+public class PaymentSuccessUserEmailDrivenBean extends EmailInvoiceNotificationBase<Invoice> {
 
     @Inject
     @QRecipientUser

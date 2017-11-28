@@ -20,7 +20,7 @@ import tech.lapsa.javax.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 
 @MessageDriven(mappedName = JNDI_JMS_DEST_PAYMENTLINK_REQUESTER_EMAIL)
-public class PaymentLinkUserEmailDrivenBean extends AEmailRequestNotificationDrivenBean<Invoice> {
+public class PaymentLinkUserEmailDrivenBean extends EmailInvoiceNotificationBase<Invoice> {
 
     @Inject
     @QRecipientUser
