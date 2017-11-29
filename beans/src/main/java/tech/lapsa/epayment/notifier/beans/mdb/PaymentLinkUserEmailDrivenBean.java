@@ -1,6 +1,6 @@
 package tech.lapsa.epayment.notifier.beans.mdb;
 
-import static tech.lapsa.epayment.notifier.beans.Constants.*;
+import static tech.lapsa.epayment.notifier.beans.NotifierDestinations.*;
 
 import java.util.Locale;
 import java.util.Properties;

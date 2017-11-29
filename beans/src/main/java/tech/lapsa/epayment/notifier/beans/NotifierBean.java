@@ -1,6 +1,6 @@
 package tech.lapsa.epayment.notifier.beans;
 
-import static tech.lapsa.epayment.notifier.beans.Constants.*;
+import static tech.lapsa.epayment.notifier.beans.NotifierDestinations.*;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
