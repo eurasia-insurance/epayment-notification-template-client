@@ -9,9 +9,11 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.jms.Destination;
 
+import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notifier.Notification;
 import tech.lapsa.epayment.notifier.Notifier;
 import tech.lapsa.javax.jms.JmsClientFactory;
+import tech.lapsa.javax.jms.JmsClientFactory.JmsEventNotificator;
 
 @Stateless
 public class NotifierBean implements Notifier {
@@ -23,7 +25,8 @@ public class NotifierBean implements Notifier {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void send(final Notification notification) {
 	final Destination destination = resolveDestination(notification);
-	jmsFactory.createSender(destination).send(notification.getEntity(), notification.getProperties());
+	final JmsEventNotificator<Invoice> notificator = jmsFactory.createEventNotificator(destination);
+	notificator.eventNotify(notification.getEntity(), notification.getProperties());
     }
 
     @Resource(name = JNDI_JMS_DEST_PAYMENTLINK_REQUESTER_EMAIL)
