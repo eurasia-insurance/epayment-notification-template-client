@@ -9,14 +9,14 @@ import javax.annotation.Resource;
 
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.java.commons.function.MyObjects;
-import tech.lapsa.javax.jms.ConsumerServiceDrivenBean;
-import tech.lapsa.javax.jms.JmsSkipValidation;
+import tech.lapsa.javax.jms.service.JmsReceiverServiceDrivenBean;
+import tech.lapsa.javax.jms.service.JmsSkipValidation;
 import tech.lapsa.lapsa.text.TextFactory;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder.TextModel;
 
 @JmsSkipValidation
-public abstract class InvoiceNotificationBase<T extends Invoice> extends ConsumerServiceDrivenBean<T> {
+public abstract class InvoiceNotificationBase<T extends Invoice> extends JmsReceiverServiceDrivenBean<T> {
 
     InvoiceNotificationBase(final Class<T> objectClazz) {
 	super(objectClazz);
