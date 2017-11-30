@@ -12,8 +12,8 @@ import javax.jms.Destination;
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notifier.Notification;
 import tech.lapsa.epayment.notifier.Notifier;
-import tech.lapsa.javax.jms.JmsClientFactory;
-import tech.lapsa.javax.jms.JmsClientFactory.JmsEventNotificator;
+import tech.lapsa.javax.jms.client.JmsClientFactory;
+import tech.lapsa.javax.jms.client.JmsEventNotificatorClient;
 
 @Stateless
 public class NotifierBean implements Notifier {
@@ -25,7 +25,7 @@ public class NotifierBean implements Notifier {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void send(final Notification notification) {
 	final Destination destination = resolveDestination(notification);
-	final JmsEventNotificator<Invoice> notificator = jmsFactory.createEventNotificator(destination);
+	final JmsEventNotificatorClient<Invoice> notificator = jmsFactory.createEventNotificator(destination);
 	notificator.eventNotify(notification.getEntity(), notification.getProperties());
     }
 
