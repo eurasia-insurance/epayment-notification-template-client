@@ -15,7 +15,6 @@
 	<name>Epayment Lib : Notifier</name>
 
 	<modules>
-		<module>client</module>
 		<module>beans</module>
 	</modules>
 
@@ -27,6 +26,7 @@
 		<!-- tech -->
 		<javax-jms-rpc.version>1.0-SNAPSHOT</javax-jms-rpc.version>
 		<lapsa-text.version>1.1-SNAPSHOT</lapsa-text.version>
+		<epayment-shared.version>1.0-SNAPSHOT</epayment-shared.version>
 		<epayment-domain.version>4.0-SNAPSHOT</epayment-domain.version>
 	</properties>
 
@@ -59,6 +59,11 @@
 				<groupId>tech.lapsa.epayment</groupId>
 				<artifactId>epayment-domain</artifactId>
 				<version>${epayment-domain.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>tech.lapsa.epayment</groupId>
+				<artifactId>epayment-shared</artifactId>
+				<version>${epayment-shared.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>tech.lapsa.javax</groupId>

@@ -1,13 +1,12 @@
-package tech.lapsa.epayment.notifier.beans.producers;
+package tech.lapsa.epayment.notificationDaemon.resources;
 
-import static tech.lapsa.epayment.notifier.beans.Constants.*;
+import static tech.lapsa.epayment.notificationDaemon.drivenBeans.Constants.*;
 
 import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
 import javax.inject.Singleton;
 import javax.mail.Session;
 
-import tech.lapsa.epayment.notifier.beans.qualifiers.QRecipientUser;
 import tech.lapsa.javax.mail.MailBuilderException;
 import tech.lapsa.javax.mail.MailFactory;
 import tech.lapsa.javax.mail.impl.SessionMailFactory;

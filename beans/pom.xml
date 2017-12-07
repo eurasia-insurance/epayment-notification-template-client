@@ -40,6 +40,12 @@
 			<optional>false</optional>
 		</dependency>
 		<dependency>
+			<groupId>tech.lapsa.epayment</groupId>
+			<artifactId>epayment-shared</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<dependency>
 			<groupId>tech.lapsa.javax</groupId>
 			<artifactId>javax-jms-rpc</artifactId>
 			<type>ejb</type>
