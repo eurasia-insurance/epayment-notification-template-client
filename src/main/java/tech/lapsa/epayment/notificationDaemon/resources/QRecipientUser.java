@@ -1,4 +1,4 @@
-package tech.lapsa.epayment.notifier.beans.qualifiers;
+package tech.lapsa.epayment.notificationDaemon.resources;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;

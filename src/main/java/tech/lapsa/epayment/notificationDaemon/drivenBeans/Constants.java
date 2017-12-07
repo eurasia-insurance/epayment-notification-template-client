@@ -1,4 +1,4 @@
-package tech.lapsa.epayment.notifier.beans;
+package tech.lapsa.epayment.notificationDaemon.drivenBeans;
 
 public final class Constants {
 

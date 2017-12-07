@@ -8,16 +8,11 @@
 	</parent>
 
 	<groupId>tech.lapsa.epayment</groupId>
-	<artifactId>epayment-notifier-root</artifactId>
-	<version>1.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<artifactId>epayment-notification-daemon</artifactId>
+	<version>2.0-SNAPSHOT</version>
+	<packaging>ejb</packaging>
 
-	<name>Epayment Lib : Notifier</name>
-
-	<modules>
-		<module>client</module>
-		<module>beans</module>
-	</modules>
+	<name>Epayment Lib : Notification daemon</name>
 
 	<properties>
 		<!-- BOMS -->
@@ -27,6 +22,7 @@
 		<!-- tech -->
 		<javax-jms-rpc.version>1.0-SNAPSHOT</javax-jms-rpc.version>
 		<lapsa-text.version>1.1-SNAPSHOT</lapsa-text.version>
+		<epayment-shared.version>1.0-SNAPSHOT</epayment-shared.version>
 		<epayment-domain.version>4.0-SNAPSHOT</epayment-domain.version>
 	</properties>
 
@@ -61,6 +57,11 @@
 				<version>${epayment-domain.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>tech.lapsa.epayment</groupId>
+				<artifactId>epayment-shared</artifactId>
+				<version>${epayment-shared.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>tech.lapsa.javax</groupId>
 				<artifactId>javax-jms-rpc</artifactId>
 				<version>${javax-jms-rpc.version}</version>
@@ -86,15 +87,88 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<dependencies>
+		<!-- tech -->
+		<dependency>
+			<groupId>tech.lapsa.java</groupId>
+			<artifactId>java-commons</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<dependency>
+			<groupId>tech.lapsa.epayment</groupId>
+			<artifactId>epayment-domain</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<dependency>
+			<groupId>tech.lapsa.javax</groupId>
+			<artifactId>javax-mail-api</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<dependency>
+			<groupId>tech.lapsa.javax</groupId>
+			<artifactId>javax-mail-impl</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<dependency>
+			<groupId>tech.lapsa.epayment</groupId>
+			<artifactId>epayment-shared</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<dependency>
+			<groupId>tech.lapsa.javax</groupId>
+			<artifactId>javax-jms-rpc</artifactId>
+			<type>ejb</type>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<dependency>
+			<groupId>tech.lapsa.lapsa</groupId>
+			<artifactId>lapsa-text</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
+		<!-- JavaEE -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>javax.jms-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>javax.ejb-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
 	<scm>
-		<connection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notifier.git</connection>
-		<developerConnection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notifier.git</developerConnection>
+		<connection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notification-daemon.git</connection>
+		<developerConnection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notification-daemon.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
 		<system>gitlab</system>
-		<url>https://gitlab.lapsa.tech/lapsa/epayment/notifier/issues</url>
+		<url>https://gitlab.lapsa.tech/lapsa/epayment/notification-daemon/issues</url>
 	</issueManagement>
 
 </project>

@@ -1,6 +1,4 @@
-package tech.lapsa.epayment.notifier.beans.mdb;
-
-import static tech.lapsa.epayment.notifier.beans.NotifierDestinations.*;
+package tech.lapsa.epayment.notificationDaemon.drivenBeans;
 
 import java.util.Locale;
 import java.util.Properties;
@@ -9,9 +7,10 @@ import javax.ejb.MessageDriven;
 import javax.inject.Inject;
 
 import tech.lapsa.epayment.domain.Invoice;
-import tech.lapsa.epayment.notifier.beans.NotificationMessages;
-import tech.lapsa.epayment.notifier.beans.NotificationTemplates;
-import tech.lapsa.epayment.notifier.beans.qualifiers.QRecipientUser;
+import tech.lapsa.epayment.notificationDaemon.resources.QRecipientUser;
+import tech.lapsa.epayment.shared.jms.EpaymentDestinations;
+import tech.lapsa.epayment.shared.notification.NotificationMessages;
+import tech.lapsa.epayment.shared.notification.NotificationTemplates;
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyStrings;
 import tech.lapsa.javax.mail.MailBuilderException;
@@ -19,7 +18,7 @@ import tech.lapsa.javax.mail.MailFactory;
 import tech.lapsa.javax.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 
-@MessageDriven(mappedName = JNDI_JMS_DEST_PAYMENTLINK_REQUESTER_EMAIL)
+@MessageDriven(mappedName = EpaymentDestinations.NOTIFIER_PAYMENTLINK_REQUESTER_EMAIL)
 public class PaymentLinkUserEmailDrivenBean extends EmailInvoiceNotificationBase<Invoice> {
 
     @Inject

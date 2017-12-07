@@ -1,10 +1,10 @@
-package tech.lapsa.epayment.notifier.beans.mdb;
+package tech.lapsa.epayment.notificationDaemon.drivenBeans;
 
 import java.util.Locale;
 
 import tech.lapsa.epayment.domain.Invoice;
-import tech.lapsa.epayment.notifier.beans.NotificationMessages;
-import tech.lapsa.epayment.notifier.beans.NotificationTemplates;
+import tech.lapsa.epayment.shared.notification.NotificationMessages;
+import tech.lapsa.epayment.shared.notification.NotificationTemplates;
 import tech.lapsa.javax.mail.MailBuilderException;
 import tech.lapsa.javax.mail.MailException;
 import tech.lapsa.javax.mail.MailFactory;
