@@ -54,8 +54,8 @@ public class PaymentSuccessUserEmailDrivenBean extends EmailInvoiceNotificationB
     }
 
     @Override
-    protected TextModelBuilder updateTextModel(TextModelBuilder textModelBuilder, Invoice invoice,
-	    Properties properties) {
+    protected TextModelBuilder updateTextModel(final TextModelBuilder textModelBuilder, final Invoice invoice,
+	    final Properties properties) {
 	return textModelBuilder;
     }
 

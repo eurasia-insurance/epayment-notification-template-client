@@ -56,17 +56,17 @@ public class PaymentLinkUserEmailDrivenBean extends EmailInvoiceNotificationBase
     }
 
     @Override
-    protected TextModelBuilder updateTextModel(TextModelBuilder textModelBuilder, Invoice invoice,
-	    Properties properties) {
+    protected TextModelBuilder updateTextModel(final TextModelBuilder textModelBuilder, final Invoice invoice,
+	    final Properties properties) {
 	MyObjects.requireNonNull(textModelBuilder, "textModelBuilder");
 	MyObjects.requireNonNull(invoice, "invoice");
 	MyObjects.requireNonNull(properties, "properties");
 
-	String paymentUrl = MyStrings.requireNonEmpty(properties.getProperty("paymentUrl"), "paymentUrl");
+	final String paymentUrl = MyStrings.requireNonEmpty(properties.getProperty("paymentUrl"), "paymentUrl");
 	try {
 	    textModelBuilder //
 		    .bind("paymentUrl", paymentUrl);
-	} catch (IllegalStateException ignoresIfArleadyBint) {
+	} catch (final IllegalStateException ignoresIfArleadyBint) {
 	}
 	return textModelBuilder;
     }
