@@ -10,11 +10,11 @@ import tech.lapsa.java.commons.exceptions.IllegalArgument;
 public interface EpaymentTemplateProvider {
 
     @Local
-    public interface EpaymentTemplateProviderLocal extends EpaymentTemplateProvider {
+    public interface TemplateProviderLocal extends EpaymentTemplateProvider {
     }
 
     @Remote
-    public interface EpaymentTemplateProviderRemote extends EpaymentTemplateProvider {
+    public interface TemplateProviderRemote extends EpaymentTemplateProvider {
     }
 
     String getMessage(NotificationMessages message, Locale locale) throws IllegalArgument;

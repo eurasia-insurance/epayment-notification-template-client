@@ -12,13 +12,6 @@
 	<name>Epayment Lib : Notification daemon : Template client</name>
 
 	<dependencies>
-		<!-- tech -->
-		<dependency>
-			<groupId>tech.lapsa.java</groupId>
-			<artifactId>java-commons</artifactId>
-			<scope>compile</scope>
-			<optional>false</optional>
-		</dependency>
 		<!-- JavaEE -->
 		<dependency>
 			<groupId>javax.ejb</groupId>
