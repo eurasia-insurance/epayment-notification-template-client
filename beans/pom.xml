@@ -57,6 +57,13 @@
 			<scope>compile</scope>
 			<optional>false</optional>
 		</dependency>
+		<!-- own -->
+		<dependency>
+			<groupId>tech.lapsa.epayment</groupId>
+			<artifactId>epayment-notification-daemon-template-client</artifactId>
+			<scope>compile</scope>
+			<optional>false</optional>
+		</dependency>
 		<!-- Payara -->
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
