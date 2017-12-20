@@ -6,19 +6,18 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import tech.lapsa.java.commons.exceptions.IllegalArgument;
-import tech.lapsa.java.commons.localization.Localized.LocalizationVariant;
 
-public interface TemplateProvider {
+public interface EpaymentTemplateProvider {
 
     @Local
-    public interface TemplateProviderLocal extends TemplateProvider {
+    public interface EpaymentTemplateProviderLocal extends EpaymentTemplateProvider {
     }
 
     @Remote
-    public interface TemplateProviderRemote extends TemplateProvider {
+    public interface EpaymentTemplateProviderRemote extends EpaymentTemplateProvider {
     }
 
-    String getMessage(NotificationMessages message, LocalizationVariant variant, Locale locale) throws IllegalArgument;
+    String getMessage(NotificationMessages message, Locale locale) throws IllegalArgument;
 
     String getTemplate(NotificationTemplates message, Locale locale) throws IllegalArgument;
 

@@ -8,9 +8,8 @@ import javax.ejb.EJBException;
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notificationDaemon.template.NotificationMessages;
 import tech.lapsa.epayment.notificationDaemon.template.NotificationTemplates;
-import tech.lapsa.epayment.notificationDaemon.template.TemplateProvider.TemplateProviderRemote;
+import tech.lapsa.epayment.notificationDaemon.template.EpaymentTemplateProvider.EpaymentTemplateProviderRemote;
 import tech.lapsa.java.commons.exceptions.IllegalArgument;
-import tech.lapsa.java.commons.localization.Localized.LocalizationVariant;
 import tech.lapsa.javax.mail.MailBuilderException;
 import tech.lapsa.javax.mail.MailException;
 import tech.lapsa.javax.mail.MailFactory;
@@ -34,7 +33,7 @@ public abstract class EmailInvoiceNotificationBase<T extends Invoice> extends In
     protected abstract NotificationTemplates getBodyTemplate();
 
     @EJB
-    private TemplateProviderRemote templates;
+    private EpaymentTemplateProviderRemote templates;
 
     @Override
     protected void sendWithModel(final TextModel textModel, final T invoice) {
@@ -46,8 +45,7 @@ public abstract class EmailInvoiceNotificationBase<T extends Invoice> extends In
 
 	    final String subjectTemplate;
 	    try {
-		subjectTemplate = templates.getMessage(getSubjectTemplate(), LocalizationVariant.NORMAL,
-			locale);
+		subjectTemplate = templates.getMessage(getSubjectTemplate(), locale);
 	    } catch (IllegalArgument e) {
 		// it should not happens
 		throw new EJBException(e.getMessage());
