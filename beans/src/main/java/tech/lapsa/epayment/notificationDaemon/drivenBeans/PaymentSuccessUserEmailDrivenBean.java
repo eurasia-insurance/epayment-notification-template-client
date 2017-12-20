@@ -8,9 +8,9 @@ import javax.inject.Inject;
 
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.epayment.notificationDaemon.resources.QRecipientUser;
+import tech.lapsa.epayment.notificationDaemon.template.NotificationMessages;
+import tech.lapsa.epayment.notificationDaemon.template.NotificationTemplates;
 import tech.lapsa.epayment.shared.jms.EpaymentDestinations;
-import tech.lapsa.epayment.shared.notification.NotificationMessages;
-import tech.lapsa.epayment.shared.notification.NotificationTemplates;
 import tech.lapsa.javax.mail.MailBuilderException;
 import tech.lapsa.javax.mail.MailFactory;
 import tech.lapsa.javax.mail.MailMessageBuilder;

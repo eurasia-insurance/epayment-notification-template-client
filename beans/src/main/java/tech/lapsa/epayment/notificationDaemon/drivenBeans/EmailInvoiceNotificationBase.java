@@ -2,9 +2,15 @@ package tech.lapsa.epayment.notificationDaemon.drivenBeans;
 
 import java.util.Locale;
 
+import javax.ejb.EJB;
+import javax.ejb.EJBException;
+
 import tech.lapsa.epayment.domain.Invoice;
-import tech.lapsa.epayment.shared.notification.NotificationMessages;
-import tech.lapsa.epayment.shared.notification.NotificationTemplates;
+import tech.lapsa.epayment.notificationDaemon.template.NotificationMessages;
+import tech.lapsa.epayment.notificationDaemon.template.NotificationTemplates;
+import tech.lapsa.epayment.notificationDaemon.template.TemplateProvider.TemplateProviderRemote;
+import tech.lapsa.java.commons.exceptions.IllegalArgument;
+import tech.lapsa.java.commons.localization.Localized.LocalizationVariant;
 import tech.lapsa.javax.mail.MailBuilderException;
 import tech.lapsa.javax.mail.MailException;
 import tech.lapsa.javax.mail.MailFactory;
@@ -27,6 +33,9 @@ public abstract class EmailInvoiceNotificationBase<T extends Invoice> extends In
 
     protected abstract NotificationTemplates getBodyTemplate();
 
+    @EJB
+    private TemplateProviderRemote templates;
+
     @Override
     protected void sendWithModel(final TextModel textModel, final T invoice) {
 	try {
@@ -35,14 +44,31 @@ public abstract class EmailInvoiceNotificationBase<T extends Invoice> extends In
 	    final MailMessageBuilder template = mailFactory()
 		    .newMailBuilder();
 
+	    final String subjectTemplate;
+	    try {
+		subjectTemplate = templates.getMessage(getSubjectTemplate(), LocalizationVariant.NORMAL,
+			locale);
+	    } catch (IllegalArgument e) {
+		// it should not happens
+		throw new EJBException(e.getMessage());
+	    }
+
 	    final String subject = TextFactory.newTextTemplateBuilder() //
-		    .buildFromPattern(getSubjectTemplate().regular(locale)) //
+		    .buildFromPattern(subjectTemplate) //
 		    .merge(textModel) //
 		    .asString();
 	    template.withSubject(subject);
 
+	    final String bodyTemplate;
+	    try {
+		bodyTemplate = templates.getTemplate(getBodyTemplate(), locale);
+	    } catch (IllegalArgument e) {
+		// it should not happens
+		throw new EJBException(e.getMessage());
+	    }
+
 	    final String body = TextFactory.newTextTemplateBuilder() //
-		    .buildFromInputStream(getBodyTemplate().getResourceAsStream(locale)) //
+		    .buildFromPattern(bodyTemplate) //
 		    .merge(textModel) //
 		    .asString();
 	    template.withHtmlPart(body);
