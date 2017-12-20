@@ -7,14 +7,14 @@ import javax.ejb.Remote;
 
 import tech.lapsa.java.commons.exceptions.IllegalArgument;
 
-public interface TemplateProvider {
+public interface EpaymentTemplateProvider {
 
     @Local
-    public interface TemplateProviderLocal extends TemplateProvider {
+    public interface EpaymentTemplateProviderLocal extends EpaymentTemplateProvider {
     }
 
     @Remote
-    public interface TemplateProviderRemote extends TemplateProvider {
+    public interface EpaymentTemplateProviderRemote extends EpaymentTemplateProvider {
     }
 
     String getMessage(NotificationMessages message, Locale locale) throws IllegalArgument;

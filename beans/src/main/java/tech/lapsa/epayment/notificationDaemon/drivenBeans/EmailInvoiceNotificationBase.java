@@ -6,9 +6,9 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 
 import tech.lapsa.epayment.domain.Invoice;
+import tech.lapsa.epayment.notificationDaemon.template.EpaymentTemplateProvider.EpaymentTemplateProviderRemote;
 import tech.lapsa.epayment.notificationDaemon.template.NotificationMessages;
 import tech.lapsa.epayment.notificationDaemon.template.NotificationTemplates;
-import tech.lapsa.epayment.notificationDaemon.template.TemplateProvider.TemplateProviderRemote;
 import tech.lapsa.java.commons.exceptions.IllegalArgument;
 import tech.lapsa.javax.mail.MailBuilderException;
 import tech.lapsa.javax.mail.MailException;
@@ -33,7 +33,7 @@ public abstract class EmailInvoiceNotificationBase<T extends Invoice> extends In
     protected abstract NotificationTemplates getBodyTemplate();
 
     @EJB
-    private TemplateProviderRemote templates;
+    private EpaymentTemplateProviderRemote templates;
 
     @Override
     protected void sendWithModel(final TextModel textModel, final T invoice) {
