@@ -9,7 +9,7 @@
 
 	<artifactId>epayment-notification-daemon-template-client</artifactId>
 
-	<name>Epayment Lib : Notification daemon : Template client</name>
+	<name>Epayment Lib : Notification daemon : Template EJB-client</name>
 
 	<dependencies>
 		<!-- tech -->
