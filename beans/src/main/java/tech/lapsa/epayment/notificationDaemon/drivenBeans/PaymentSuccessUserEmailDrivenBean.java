@@ -11,9 +11,9 @@ import tech.lapsa.epayment.notificationDaemon.resources.QRecipientUser;
 import tech.lapsa.epayment.notificationDaemon.template.NotificationMessages;
 import tech.lapsa.epayment.notificationDaemon.template.NotificationTemplates;
 import tech.lapsa.epayment.shared.jms.EpaymentDestinations;
-import tech.lapsa.javax.mail.MailBuilderException;
-import tech.lapsa.javax.mail.MailFactory;
-import tech.lapsa.javax.mail.MailMessageBuilder;
+import tech.lapsa.lapsa.mail.MailBuilderException;
+import tech.lapsa.lapsa.mail.MailFactory;
+import tech.lapsa.lapsa.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 
 @MessageDriven(mappedName = EpaymentDestinations.NOTIFIER_PAYMENTSUCCESS_REQUESTER_EMAIL)
