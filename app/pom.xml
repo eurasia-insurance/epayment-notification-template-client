@@ -10,7 +10,7 @@
 	<artifactId>epayment-notification-daemon-app</artifactId>
 	<packaging>ear</packaging>
 
-	<name>Epayment Lib : Notification daemon : EE Application</name>
+	<name>Epayment Lib : Notification daemon : EAR</name>
 
 	<dependencies>
 		<dependency>
