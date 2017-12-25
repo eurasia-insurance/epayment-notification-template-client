@@ -13,9 +13,9 @@ import tech.lapsa.epayment.notificationDaemon.template.NotificationTemplates;
 import tech.lapsa.epayment.shared.jms.EpaymentDestinations;
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyStrings;
-import tech.lapsa.javax.mail.MailBuilderException;
-import tech.lapsa.javax.mail.MailFactory;
-import tech.lapsa.javax.mail.MailMessageBuilder;
+import tech.lapsa.lapsa.mail.MailBuilderException;
+import tech.lapsa.lapsa.mail.MailFactory;
+import tech.lapsa.lapsa.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 
 @MessageDriven(mappedName = EpaymentDestinations.NOTIFIER_PAYMENTLINK_REQUESTER_EMAIL)

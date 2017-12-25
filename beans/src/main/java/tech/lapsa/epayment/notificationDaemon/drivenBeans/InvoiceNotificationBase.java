@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 
 import tech.lapsa.epayment.domain.Invoice;
 import tech.lapsa.java.commons.function.MyObjects;
-import tech.lapsa.javax.jms.service.JmsReceiverServiceDrivenBean;
-import tech.lapsa.javax.jms.service.JmsSkipValidation;
+import tech.lapsa.lapsa.jmsRPC.service.JmsReceiverServiceDrivenBean;
+import tech.lapsa.lapsa.jmsRPC.service.JmsSkipValidation;
 import tech.lapsa.lapsa.text.TextFactory;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder.TextModel;

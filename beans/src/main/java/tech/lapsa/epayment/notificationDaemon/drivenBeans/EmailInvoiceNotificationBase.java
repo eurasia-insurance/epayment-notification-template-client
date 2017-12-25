@@ -10,10 +10,10 @@ import tech.lapsa.epayment.notificationDaemon.template.EpaymentTemplateProvider.
 import tech.lapsa.epayment.notificationDaemon.template.NotificationMessages;
 import tech.lapsa.epayment.notificationDaemon.template.NotificationTemplates;
 import tech.lapsa.java.commons.exceptions.IllegalArgument;
-import tech.lapsa.javax.mail.MailBuilderException;
-import tech.lapsa.javax.mail.MailException;
-import tech.lapsa.javax.mail.MailFactory;
-import tech.lapsa.javax.mail.MailMessageBuilder;
+import tech.lapsa.lapsa.mail.MailBuilderException;
+import tech.lapsa.lapsa.mail.MailException;
+import tech.lapsa.lapsa.mail.MailFactory;
+import tech.lapsa.lapsa.mail.MailMessageBuilder;
 import tech.lapsa.lapsa.text.TextFactory;
 import tech.lapsa.lapsa.text.TextFactory.TextModelBuilder.TextModel;
 
