@@ -9,7 +9,7 @@
 
 	<groupId>tech.lapsa.epayment</groupId>
 	<artifactId>epayment-notification-daemon-root</artifactId>
-	<version>2.0</version>
+	<version>2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Epayment Lib : Notification daemon</name>
@@ -110,7 +110,7 @@
 	<scm>
 		<connection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notification-daemon.git</connection>
 		<developerConnection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notification-daemon.git</developerConnection>
-		<tag>v2.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
