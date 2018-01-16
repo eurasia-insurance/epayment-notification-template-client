@@ -2,14 +2,42 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>tech.lapsa.epayment</groupId>
-		<artifactId>epayment-notification-daemon-root</artifactId>
-		<version>2.1-SNAPSHOT</version>
+		<groupId>tech.lapsa.maven</groupId>
+		<artifactId>maven-general</artifactId>
+		<version>3.1</version>
 	</parent>
 
-	<artifactId>epayment-notification-daemon-template-client</artifactId>
+	<groupId>tech.lapsa.epayment</groupId>
+	<artifactId>epayment-notification-template-client</artifactId>
+	<version>2.1-SNAPSHOT</version>
 
-	<name>Epayment Lib : Notification daemon : Template EJB-client</name>
+	<name>Epayment Lib : Notification : Template EJB-client</name>
+
+	<properties>
+		<!-- BOMS -->
+		<java-commons.version>1.2</java-commons.version>
+		<javax-javaee-bom.version>7.0a</javax-javaee-bom.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- BOMS -->
+			<dependency>
+				<groupId>tech.lapsa.java</groupId>
+				<artifactId>java-commons-root</artifactId>
+				<version>${java-commons.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>tech.lapsa.javax</groupId>
+				<artifactId>javax-javaee-bom</artifactId>
+				<version>${javax-javaee-bom.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<!-- tech -->
@@ -26,5 +54,16 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+
+	<scm>
+		<connection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notification-template-client.git</connection>
+		<developerConnection>scm:git:https://gitlab.lapsa.tech/lapsa/epayment/notification-template-client.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<system>gitlab</system>
+		<url>https://gitlab.lapsa.tech/lapsa/epayment/notification-template-client/issues</url>
+	</issueManagement>
 
 </project>
