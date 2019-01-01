@@ -10,6 +10,7 @@
 	<groupId>tech.lapsa.epayment</groupId>
 	<artifactId>epayment-notification-template-client</artifactId>
 	<version>CURRENT-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<name>Epayment Lib : Notification : Template EJB-client</name>
 
